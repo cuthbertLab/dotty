@@ -73,7 +73,7 @@ GameManager.prototype.addStartTiles = function () {
 GameManager.prototype.addRandomTile = function () {
   if (this.grid.cellsAvailable()) {
     var value = 2;
-    while (Math.random() > 0.9) {
+    while (Math.random() > 0.8) {
         value = value * 2;
     }
     var tile = new Tile(this.grid.randomAvailableCell(), value);
@@ -160,8 +160,8 @@ GameManager.prototype.move = function (direction) {
         var next      = self.grid.cellContent(positions.next);
 
         // Only one merger per row traversal?
-        if (next && next.value === tile.value && !next.mergedFrom) {
-          var merged = new Tile(positions.next, tile.value * 2);
+        if (next && next.canMerge(tile) && !next.mergedFrom) {
+          var merged = new Tile(positions.next, tile.value + next.value);
           merged.mergedFrom = [tile, next];
 
           self.grid.insertTile(merged);
@@ -191,8 +191,14 @@ GameManager.prototype.move = function (direction) {
 
     if (!this.movesAvailable()) {
       this.over = true; // Game over!
+    } else {
+        // do twice
+        this.addRandomTile();
+        
+        if (!this.movesAvailable()) {
+          this.over = true; // Game over!
+        }
     }
-
     this.actuate();
   }
 };

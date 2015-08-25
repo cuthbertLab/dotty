@@ -293,7 +293,7 @@ hr {
     &, .tile-inner {
       width: ceil($tile-size);
       height: ceil($tile-size);
-      line-height: ceil($tile-size) + 13px;
+      line-height: ceil($tile-size) + 70px;
       font-family: "BravuraBreve";
     }
 
@@ -358,6 +358,10 @@ hr {
       // Calculate base background color
       $gold-percent: ($exponent - 1) / ($limit - 1) * 100;
       $mixed-background: mix($tile-gold-color, $tile-color, $gold-percent);
+
+      @if $power > 512 {
+         line-height: ceil($tile-size) + 13px;
+      }
 
       $nth-color: nth($special-colors, $exponent);
 

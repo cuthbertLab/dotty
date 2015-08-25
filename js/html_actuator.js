@@ -56,17 +56,27 @@ HTMLActuator.prototype.addTile = function (tile) {
 
   // for later use -- dotted notes...
   var valueRounded = Math.pow(2, Math.floor(Math.log(tile.value) / Math.log(2)))
-
+  var offOfdoubledFrac = ((valueRounded * 2) - tile.value)/valueRounded;
+  var numDots = Math.abs(Math.log2(offOfdoubledFrac))
+  
+  
   // We can't use classlist because it somehow glitches when replacing classes
   var classes = ["tile", "tile-" + valueRounded, positionClass];
 
-  if (tile.value > 2048) classes.push("tile-super");
+  if (valueRounded > 2048) classes.push("tile-super");
 
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  var tileCharacters = ["\uE95F", "\uE93C", "\uE95E", "\uE95D", "\uE95C", "\uE955", "\uE954", "\uE953", "\uE952", "\uE951", "\uE950", "\uE92C", "\uE92D"];
-  inner.textContent = tileCharacters[(Math.log(valueRounded) / Math.log(2)) - 1];
+  var dotCharacter = "\uE1E7";
+  var tileCharacters = ["\uE1DF", "\uE1DD", "\uE1DB", "\uE1D9", "\uE1D7", "\uE1D5", "\uE1D3", "\uE1D2", "\uE1D0", "\uE95D", "\uE95C", "\uE955", "\uE954", "\uE953"];
+  //var tileCharacters = ["\uE95F", "\uE93C", "\uE95E", "\uE95D", "\uE95C", "\uE955", "\uE954", "\uE953", "\uE952", "\uE951", "\uE950", "\uE92C", "\uE92D"];
+
+  var tileText = tileCharacters[(Math.log(valueRounded) / Math.log(2)) - 1];
+  for (var dotNum = 0; dotNum < numDots; dotNum++) {
+      tileText += dotCharacter;
+  }
+  inner.textContent = tileText;
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
