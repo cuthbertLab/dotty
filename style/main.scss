@@ -169,7 +169,7 @@ hr {
 }
 
 // Game field mixin used to render CSS at different width
-@mixin game-field {
+@mixin game-field($field-width, $grid-spacing, $tile-size, $game-container-margin-top) {
   .game-container {
     margin-top: $game-container-margin-top;
     position: relative;
@@ -311,7 +311,7 @@ hr {
 }
 
 // End of game-field mixin
-@include game-field;
+@include game-field($field-width, $grid-spacing, $tile-size, $game-container-margin-top);
 
 .tile {
   position: absolute; // Makes transforms relative to the top-left corner
@@ -463,9 +463,7 @@ hr {
   // Redefine variables for smaller screens
   $field-width: 280px;
   $grid-spacing: 10px;
-  $grid-row-cells: 4;
   $tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
-  $tile-border-radius: 3px;
   $game-container-margin-top: 17px;
 
   html, body {
@@ -514,7 +512,7 @@ hr {
   }
 
   // Render the game field at the right width
-  @include game-field;
+  @include game-field($field-width, $grid-spacing, $tile-size, $game-container-margin-top);
 
   // Rest of the font-size adjustments in the tile class
   .tile .tile-inner {
