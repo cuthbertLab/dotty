@@ -65,7 +65,8 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  var tileCharacters = ["\uE95F", "\uE93C", "\uE95E", "\uE95D", "\uE95C", "\uE955", "\uE954", "\uE953", "\uE952", "\uE951", "\uE950", "\uE92C", "\uE92D"];
+  var tileCharacters = ["\uE1DF", "\uE1DD", "\uE1DB", "\uE1D9", "\uE1D7", "\uE1D5", "\uE1D3", "\uE1D2", "\uE1D0", "\uE95D", "\uE95C", "\uE955", "\uE954", "\uE953"];
+  //var tileCharacters = ["\uE95F", "\uE93C", "\uE95E", "\uE95D", "\uE95C", "\uE955", "\uE954", "\uE953", "\uE952", "\uE951", "\uE950", "\uE92C", "\uE92D"];
   inner.textContent = tileCharacters[(Math.log(valueRounded) / Math.log(2)) - 1];
 
   if (tile.previousPosition) {
