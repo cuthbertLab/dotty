@@ -41,7 +41,7 @@ body {
 }
 
 h1.title {
-  font-size: 80px;
+  font-size: 65px;
   font-weight: bold;
   margin: 0;
   display: block;
@@ -293,8 +293,8 @@ hr {
     &, .tile-inner {
       width: ceil($tile-size);
       height: ceil($tile-size);
-      line-height: $tile-size + 70px;
-      font-family: "Bravura";
+      line-height: ceil($tile-size) + 13px;
+      font-family: "BravuraBreve";
     }
 
     // Build position classes
@@ -383,21 +383,6 @@ hr {
                     inset 0 0 0 1px rgba(white, $glow-opacity / 3);
       }
 
-      // Adjust font size for bigger numbers
-      @if $power >= 100 and $power < 1000 {
-        font-size: 45px;
-
-        // Media queries placed here to avoid carrying over the rest of the logic
-        @include smaller($mobile-threshold) {
-          font-size: 25px;
-        }
-      } @else if $power >= 1000 {
-        font-size: 35px;
-
-        @include smaller($mobile-threshold) {
-          font-size: 15px;
-        }
-      }
     }
 
     $exponent: $exponent + 1;
