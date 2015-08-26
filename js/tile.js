@@ -17,12 +17,9 @@ Tile.prototype.updatePosition = function (position) {
 };
 
 Tile.prototype.canMerge = function(other) {
-    console.log(this.value);
-    console.log(other.value);
     if (this.value == other.value) {
         return true;  // redundant w/ last statement, but clearer...
     }
-    
     var valueRounded = Math.pow(2, Math.floor(Math.log(this.value) / Math.log(2)))
     var offOfdoubled = ((valueRounded * 2) - this.value);
     if (offOfdoubled/2.0 == other.value) {
@@ -39,6 +36,11 @@ Tile.prototype.canMerge = function(other) {
     if (this.value + other.value == valueRoundedO * 2) {
         return true;
     }    
+    var sumOffDouble = Math.max(valueRounded, valueRoundedO) * 2 - (this.value + other.value)
+    if ((Math.log(sumOffDouble) / Math.log(2)) == Math.floor(Math.log(sumOffDouble)/Math.log(2))) {
+	return true; // the sum is a dotted note; like half + dotted quarter.
+    }
+
     return false;
 }
 
